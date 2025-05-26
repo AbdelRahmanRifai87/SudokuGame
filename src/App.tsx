@@ -1,5 +1,12 @@
+import GamePage from "./pages/GamePage";
+
+// onClick={colorMode.toggleColor
 function App() {
-  return <></>;
+  return (
+    <>
+      <GamePage />
+    </>
+  );
 }
 
 export default App;
