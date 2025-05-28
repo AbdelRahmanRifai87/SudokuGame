@@ -16,36 +16,25 @@ function GamePage() {
   return (
     <>
       <div className="game-page">
-        <SudokuGrid
-          selectedNumber={selectedNumber}
-          onNumberUsed={handleNumberUsed}
-        />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "wrap",
-            gap: "10px",
-            marginTop: "20px",
-          }}
-        >
+        <div className="number-pad">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <div
+              className="number-button"
               key={num}
               onClick={() => handleNumberClick(num)}
               style={{
-                backgroundColor: "#f0f0f0",
-                padding: "10px",
-                cursor: "pointer",
                 border:
                   selectedNumber === num ? "2px solid blue" : "1px solid gray",
-                borderRadius: "4px",
               }}
             >
               {num}
             </div>
           ))}
         </div>
+        <SudokuGrid
+          selectedNumber={selectedNumber}
+          onNumberUsed={handleNumberUsed}
+        />
       </div>
     </>
   );

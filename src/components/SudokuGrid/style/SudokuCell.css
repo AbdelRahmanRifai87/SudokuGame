@@ -28,6 +28,20 @@ input.no-spinner {
     border: 2px solid #007bff;
 }
 
+.sudoku-cell.highlighted {
+    background-color: #dbe9ff;
+    /* light blue without border */
+}
+
+.sudoku-cell.conflict {
+    background-color: #f8d7da;
+    /* light red background */
+    border-color: #dc3545;
+    /* red border */
+    color: #721c24;
+    /* dark red text */
+}
+
 .sudoku-cell:hover {
     background-color: #f0f0f0;
 }

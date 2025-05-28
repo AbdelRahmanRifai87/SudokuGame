@@ -6,3 +6,32 @@
     align-items: center;
     gap: 20px;
 }
+
+.number-pad {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 200px;
+    height: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+
+}
+
+.number-button {
+    background-color: #f0f0f0;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number-button:hover {
+    background-color: #e0e0e0;
+}

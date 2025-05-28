@@ -1,0 +1,23 @@
+.message {
+    opacity: 0;
+    transition: opacity 1s ease;
+    /* Optional styling */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    pointer-events: none;
+    /* so it doesn't block clicks */
+}
+
+.message.visible {
+    opacity: 1;
+}
+
+.message.hidden {
+    opacity: 0;
+}
