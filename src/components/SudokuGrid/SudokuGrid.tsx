@@ -5,39 +5,35 @@ import extract3x3Subgrids, {
   validateSudoku,
 } from "../../utils/SudokuFunctions";
 import "./style/SudokuGrid.css";
+import type { SudokuCell } from "../../utils/SudokuFunctions";
 
 type Props = {
   selectedNumber?: number | null;
   onNumberUsed?: () => void;
+  Grid: SudokuCell[][];
+  setGrid: React.Dispatch<React.SetStateAction<SudokuCell[][]>>;
+  setSelectedCell: React.Dispatch<
+    React.SetStateAction<{ row: number; col: number } | null>
+  >;
+  selectedCell: { row: number; col: number } | null;
 };
-const solvedGrid = [
-  [5, 3, 4, 6, 7, 8, 9, 1, 2],
-  [6, 7, 2, 1, 9, 5, 3, 4, 8],
-  [1, 9, 8, 3, 4, 2, 5, 6, 7],
-  [8, 5, 9, 7, 6, 1, 4, 2, 3],
-  [4, 2, 6, 8, 5, 3, 7, 9, 1],
-  [7, 1, 3, 9, 2, 4, 8, 5, 6],
-  [9, 6, 1, 5, 3, 7, 2, 8, 4],
-  [2, 8, 7, 4, 1, 9, 6, 3, 5],
-  [3, 4, 5, 2, 8, 6, 1, 7, 9],
-];
-//  Array(9)
-//       .fill(null)
-//       .map(() => Array(9).fill(0))
-function SudokuGrid({ selectedNumber, onNumberUsed }: Props) {
-  // Initialize a 9x9 grid with zeros
-  const [Grid, setGrid] = useState(solvedGrid);
 
-  const [selectedCell, setSelectedCell] = useState<{
-    row: number;
-    col: number;
-  } | null>(null);
-
+function SudokuGrid({
+  selectedNumber,
+  onNumberUsed,
+  Grid,
+  setGrid,
+  selectedCell,
+  setSelectedCell,
+}: Props) {
   const [conflicts, setConflicts] = useState<{ row: number; col: number }[]>(
     []
   );
+
   const [message, setMessage] = useState<string>("");
+
   const [showMessage, setShowMessage] = useState(false);
+
   useEffect(() => {
     if (
       selectedNumber !== null &&
@@ -46,11 +42,16 @@ function SudokuGrid({ selectedNumber, onNumberUsed }: Props) {
     ) {
       setGrid((prevGrid) =>
         prevGrid.map((row, rowIndex) =>
-          row.map((cell, colIndex) =>
-            rowIndex === selectedCell.row && colIndex === selectedCell.col
-              ? selectedNumber
-              : cell
-          )
+          row.map((cell, colIndex) => {
+            if (
+              rowIndex === selectedCell.row &&
+              colIndex === selectedCell.col &&
+              cell.isEditable
+            ) {
+              return { ...cell, value: selectedNumber! };
+            }
+            return cell;
+          })
         )
       );
 
@@ -59,24 +60,11 @@ function SudokuGrid({ selectedNumber, onNumberUsed }: Props) {
   }, [selectedNumber, selectedCell, onNumberUsed]);
 
   useEffect(() => {
-    const conflictCells = validateSudoku(Grid);
+    const numericGrid = Grid.map((row) => row.map((cell) => cell.value));
+    const conflictCells = validateSudoku(numericGrid);
     setConflicts(conflictCells);
   }, [Grid]);
 
-  const subgrids = extract3x3Subgrids(Grid);
-
-  // Handler for the button
-  const handleCheckSolution = () => {
-    const conflictCells = validateSudoku(Grid);
-    if (conflictCells.length === 0 && Grid.flat().every((num) => num !== 0)) {
-      setMessage("Congratulations! The solution is correct.");
-      setShowMessage(true);
-    } else {
-      setMessage("There are conflicts or incomplete cells in the solution.");
-      setConflicts(conflictCells); // Highlight conflicts on button press as well
-      setShowMessage(true);
-    }
-  };
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
@@ -85,6 +73,7 @@ function SudokuGrid({ selectedNumber, onNumberUsed }: Props) {
       return () => clearTimeout(timer);
     }
   }, [message]);
+
   useEffect(() => {
     if (showMessage) {
       // After 5 seconds start fading out
@@ -104,6 +93,27 @@ function SudokuGrid({ selectedNumber, onNumberUsed }: Props) {
     }
   }, [showMessage]);
 
+  // Handler for the button
+  const handleCheckSolution = () => {
+    const numericGrid = Grid.map((row) => row.map((cell) => cell.value));
+    const conflictCells = validateSudoku(numericGrid);
+
+    if (
+      conflictCells.length === 0 &&
+      Grid.flat().every((cell) => cell.value !== 0)
+    ) {
+      setMessage("Congratulations! The solution is correct.");
+      setShowMessage(true);
+    } else {
+      setMessage("There are conflicts or incomplete cells in the solution.");
+      setConflicts(conflictCells); // Highlight conflicts on button press as well
+      setShowMessage(true);
+    }
+  };
+
+  const subgrids = extract3x3Subgrids(Grid);
+  useEffect(() => console.log(`subgrid ${subgrids}`), []);
+
   return (
     <Box
       className="sudoku-grid-container"
@@ -111,6 +121,7 @@ function SudokuGrid({ selectedNumber, onNumberUsed }: Props) {
       justifyContent="center"
       alignItems="center"
       height="100vh"
+      zIndex={1}
     >
       <Box
         className="sudoku-grid"
@@ -142,6 +153,7 @@ function SudokuGrid({ selectedNumber, onNumberUsed }: Props) {
           );
         })}
       </Box>
+
       <Box sx={{ position: "relative", marginLeft: "20px" }}>
         <Button variant="contained" onClick={handleCheckSolution}>
           Check Solution

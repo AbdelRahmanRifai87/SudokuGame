@@ -1,11 +1,10 @@
 /* Hide number input arrows in Firefox */
 body {
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-input.no-spinner {
-    -moz-appearance: textfield;
-}
+
 
 .sudoku-cell {
     width: 100%;
@@ -23,9 +22,32 @@ input.no-spinner {
     /* border: 2px solid #ccc; */
 }
 
+@keyframes glowGreen {
+    0% {
+        box-shadow: 0 0 0 rgb(52, 192, 52);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgb(52, 192, 52);
+    }
+
+    100% {
+        box-shadow: 0 0 0 rgb(52, 192, 52);
+    }
+}
+
+.sudoku-cell.solved {
+    animation: glowGreen 2s ease-out;
+}
+
 .sudoku-cell.selected {
     background-color: lightblue;
     border: 2px solid #007bff;
+}
+
+.sudoku-cell.selected.fixed {
+    background-color: lightblue;
+    border: 2px solid #97999c;
 }
 
 .sudoku-cell.highlighted {
@@ -40,6 +62,11 @@ input.no-spinner {
     /* red border */
     color: #721c24;
     /* dark red text */
+}
+
+.sudoku-cell.fixed {
+    color: rgb(109, 109, 109);
+
 }
 
 .sudoku-cell:hover {

@@ -1,0 +1,54 @@
+.hint-button {
+    background-color: #fcbf49;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    margin-left: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+
+}
+
+.hint-button:hover {
+    background-color: #f77f00;
+    transform: scale(1.05);
+}
+
+.hint-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
+}
+
+.hint-error-message {
+    position: absolute;
+    background-color: #c44141bb;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    animation: fadeOut 3s forwards;
+    width: fit-content;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

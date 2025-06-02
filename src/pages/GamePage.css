@@ -5,20 +5,51 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    position: relative;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+
+}
+
+.back-arrow button {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: none;
+    transition: box-shadow 0.3s;
+
+}
+
+.back-arrow button:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+}
+
+.pad {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    z-index: 1;
+    width: 100%;
 }
 
 .number-pad {
     display: grid;
-
+    margin: auto;
+    margin-top: 10px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 10px;
     width: 200px;
     height: 200px;
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 4px;
-    margin-top: 20px;
+
 
 }
 
@@ -34,4 +65,12 @@
 
 .number-button:hover {
     background-color: #e0e0e0;
+}
+
+.num-generate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }

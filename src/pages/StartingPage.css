@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.cover {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+/* body::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Edge */
+
+
+.starting-page {
+    width: 50vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.starting-page h1 {
+    width: 100%;
+    text-align: center;
+    font-family: "Barrio", system-ui;
+    font-weight: 100;
+    font-size: 4rem
+}
+
+.buttons {
+
+    background-color: rgba(238, 109, 109, 0.61);
+
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 10px;
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    z-index: 2;
+
+}
+
+.buttons button {
+    width: 220px;
+    padding: 12px 20px;
+    margin: 10px auto;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.buttons button:hover {
+    background: linear-gradient(135deg, #ffc3a0, #ffafbd);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.buttons button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.buttons button {}
+
+.bubble-background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: antiquewhite;
+    /* Your background */
+    z-index: 0;
+}
+
+.bubble {
+    position: absolute;
+    background: rgba(171, 52, 240, 0.3);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: floatRandom linear infinite;
+    z-index: 0;
+}
+
+@keyframes floatRandom {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translate(var(--dx, 100px), var(--dy, -100px));
+        opacity: 0.1;
+    }
+}
+
+.bubble:nth-child(odd) {
+    width: 30px;
+    height: 30px;
+
+
+}
+
+.bubble:nth-child(even) {
+    width: 15px;
+    height: 15px;
+
+}
