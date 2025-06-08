@@ -3,6 +3,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate } from "react-router-dom";
 import NumberPad from "../components/NumPad";
 import { useState } from "react";
+
 import type { SudokuCell } from "../utils/SudokuFunctions";
 import {
   convertToNumberGrid,
@@ -10,6 +11,8 @@ import {
   applySolvedGrid,
 } from "../utils/SudokuFunctions";
 import { Button } from "@mui/material";
+
+import ImageUploader from "../components/ImageIpload";
 
 function ManualSolverPage() {
   const navigate = useNavigate();
@@ -23,6 +26,7 @@ function ManualSolverPage() {
     row: number;
     col: number;
   } | null>(null);
+
   const handleNumberClick = (num: number) => {
     setSelectedNumber(num);
   };
@@ -58,6 +62,7 @@ function ManualSolverPage() {
             selectedNumber={selectedNumber}
             onNumberClick={handleNumberClick}
           />
+          <ImageUploader onTextExtracted={setGrid} />
         </div>
         <SudokuGrid
           selectedCell={selectedCell}
@@ -67,6 +72,7 @@ function ManualSolverPage() {
           Grid={Grid}
           setGrid={setGrid}
         />
+
         <Button onClick={Solve}>solve</Button>
       </div>
     </>

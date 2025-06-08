@@ -1,3 +1,5 @@
+import Tesseract from "tesseract.js";
+
 function extract3x3Subgrids(grid: SudokuCell[][]): SudokuCell[][][] {
   const subgrids: SudokuCell[][][] = [];
 
@@ -366,6 +368,15 @@ export function getCellStatus(
 
   return { isSelected, isHighlighted, isConflict };
 }
+
+export const recognizeTextFromImage = async (
+  image: string
+): Promise<string> => {
+  const result = await Tesseract.recognize(image, "eng", {
+    tessedit_char_whitelist: "123456789",
+  });
+  return result.data.text;
+};
 
 export { validateSudoku };
 export default extract3x3Subgrids;
